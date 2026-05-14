@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yyu.backendcompetitionserver.mapper.CompetitionQuestionMapper">
+
+    <resultMap id="BaseResultMap" type="com.yupi.yuojbackendmodel.model.entity.CompetitionQuestion">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="title" column="title" jdbcType="VARCHAR"/>
+            <result property="content" column="content" jdbcType="VARCHAR"/>
+            <result property="judgeCase" column="judgeCase" jdbcType="VARCHAR"/>
+            <result property="judgeConfig" column="judgeConfig" jdbcType="VARCHAR"/>
+            <result property="competitionId" column="competitionId" jdbcType="BIGINT"/>
+            <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
+            <result property="isDelete" column="isDelete" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,title,content,
+        judgeCase,judgeConfig,competitionId,
+        createTime,score,isDelete
+    </sql>
+    <insert id="insertList" parameterType="java.util.List">
+        INSERT INTO competition_question
+        (
+        title, content, judgeCase, judgeConfig, competitionId, createTime,score
+        )
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.title}, #{item.content}, #{item.judgeCase}, #{item.judgeConfig}, #{item.competitionId}, #{item.createTime}, #{item.score}
+            )
+        </foreach>
+    </insert>
+    <select id="selectQuestionListByCompetitionId"
+            resultType="com.yupi.yuojbackendmodel.model.entity.CompetitionQuestion">
+        SELECT <include refid="Base_Column_List"/>
+        FROM competition_question
+        WHERE competitionId = #{competitionId} AND isDelete = 0
+    </select>
+</mapper>

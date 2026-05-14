@@ -1,0 +1,79 @@
+spring:
+  application:
+    name: backend-codeSandBox-service
+  # 默认 dev 环境
+  profiles:
+    active: dev
+  # 支持 swagger3
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  # session 配置
+  session:
+    store-type: redis
+    # 30 天过期
+    timeout: 2592000
+  # 数据库配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://8.152.161.159:3306/yuoj
+    url: jdbc:mysql://localhost:3306/yuoj
+
+    username: root
+    password: ${MYSQL_PASSWORD:root}
+  # Redis 配置
+  redis:
+    database: 1
+#    host: 8.152.161.159
+    host: localhost
+    port: 6379
+    timeout: 5000
+  servlet:
+    multipart:
+      # 大小限制
+      max-file-size: 10MB
+  cloud:
+    nacos:
+      discovery:
+#        server-addr: 8.152.161.159:18848
+        server-addr: localhost:8848
+        username: nacos
+        password: nacos
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    password: guest
+#    username: guest
+server:
+  address: 0.0.0.0
+  port: 8105
+  servlet:
+    context-path: /api/sandbox
+    # cookie 30 天过期
+    session:
+      cookie:
+        max-age: 2592000
+        path: /api
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      logic-delete-field: isDelete # 全局逻辑删除的实体字段名
+      logic-delete-value: 1 # 逻辑已删除值（默认为 1）
+      logic-not-delete-value: 0 # 逻辑未删除值（默认为 0）
+# 代码沙箱配置
+codesandbox:
+  type: remote
+knife4j:
+  enable: true
+cos:
+  client:
+    accessKey: ${COS_ACCESS_KEY:your-cos-access-key}
+    secretKey: ${COS_SECRET_KEY:your-cos-secret-key}
+    region: ap-beijing
+    bucket: yyda-1333102418
+# AI 配置
+ai:
+  apiKey: ${AI_API_KEY:your-ai-api-key}

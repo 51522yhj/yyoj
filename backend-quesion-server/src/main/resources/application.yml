@@ -1,0 +1,86 @@
+
+spring:
+  application:
+    name: backend-question-server
+  # ?? dev ??
+  profiles:
+    active: dev
+  # 符合这种匹配规则
+  #  /users/*/profile 匹配 /users/123/profile，但不匹配 /users/123/settings。
+  #  /users/**/profile 匹配 /users/123/profile 和 /users/123/settings/profile。
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  # session ??
+  session:
+    store-type: redis
+    # 30 ???
+    timeout: 2592000
+  rabbitmq:
+#    host: 8.152.161.159
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+  # ?????
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://8.152.161.159:3306/yyoj
+    url: jdbc:mysql://localhost:3306/yyoj
+    username: root
+    password: ${MYSQL_PASSWORD:root}
+  # Redis ??
+  redis:
+    database: 1
+#    host: 8.152.161.159
+    host: 127.0.0.1
+    port: 6379
+    timeout: 5000
+  servlet:
+    multipart:
+      # ????
+      max-file-size: 10MB
+  cloud:
+    nacos:
+      discovery:
+#        server-addr: 8.152.161.159:18848
+        server-addr: 127.0.0.1:8848
+        username: nacos
+        password: nacos
+server:
+  address: 0.0.0.0
+  port: 8103
+  servlet:
+    context-path: /api/question
+    # cookie 30 ???
+    session:
+      cookie:
+        max-age: 2592000
+        path: /api
+mybatis-plus:
+  configuration:
+    cache-enabled: false
+    map-underscore-to-camel-case: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      logic-delete-field: isDelete # ????????????
+      logic-delete-value: 1 # ?????????? 1?
+      logic-not-delete-value: 0 # ?????????? 0?
+knife4j:
+  enable: true
+logging:
+  level:
+    com:
+      yyu:
+        backendquesionserver:
+          mapper: DEBUG
+cos:
+  client:
+    accessKey: ${COS_ACCESS_KEY:your-cos-access-key}
+    secretKey: ${COS_SECRET_KEY:your-cos-secret-key}
+    region: ap-beijing
+    bucket: yyda-1333102418
+# AI 配置
+ai:
+  apiKey: ${AI_API_KEY:your-ai-api-key}

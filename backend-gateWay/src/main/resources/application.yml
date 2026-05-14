@@ -1,0 +1,63 @@
+spring:
+  redis:
+    database: 1
+#    host: 8.152.161.159
+    host: 127.0.0.1
+    port: 6379
+    timeout: 5000
+  cloud:
+
+    nacos:
+      discovery:
+#        server-addr: 8.152.161.159:18848
+        server-addr: 127.0.0.1:8848
+        username: nacos
+        password: nacos
+    gateway:
+      routes:
+        - id: backend-user-server
+          uri: lb://backend-user-server
+          predicates:
+            - Path=/api/user/**
+        - id:  backend-question-server
+          uri: lb://backend-question-server
+          predicates:
+            - Path=/api/question/**
+        - id: backend-judge-service
+          uri: lb://backend-judge-service
+          predicates:
+            - Path=/api/judge/**
+        - id: backend-codeSandBox-service
+          uri: lb://backend-codeSandBox-service
+          predicates:
+            - Path=/api/sandbox/**
+        - id: backend-competition-service
+          uri: lb://backend-competition-service
+          predicates:
+            - Path=/api/competition/**
+  application:
+    name: backend-gateway
+  main:
+    web-application-type: reactive
+server:
+  port: 8101
+knife4j:
+  gateway:
+    # ① 第一个配置，开启gateway聚合组件
+    enabled: true
+    # ② 第二行配置，设置聚合模式采用discover服务发现的模式
+    strategy: discover
+    discover:
+      # ③ 第三行配置，开启discover模式
+      enabled: true
+      # ④ 第四行配置，聚合子服务全部为Swagger2规范的文档
+      version: swagger2
+cos:
+  client:
+    accessKey: ${COS_ACCESS_KEY:your-cos-access-key}
+    secretKey: ${COS_SECRET_KEY:your-cos-secret-key}
+    region: ap-beijing
+    bucket: yyda-1333102418
+# AI 配置
+ai:
+  apiKey: ${AI_API_KEY:your-ai-api-key}

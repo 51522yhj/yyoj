@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yyu.backendquesionserver.mapper.QuestionSubmitMapper">
+
+    <resultMap id="BaseResultMap" type="com.yupi.yuojbackendmodel.model.entity.QuestionSubmit">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="language" column="language" jdbcType="VARCHAR"/>
+            <result property="code" column="code" jdbcType="VARCHAR"/>
+            <result property="judgeInfo" column="judgeInfo" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="INTEGER"/>
+            <result property="questionId" column="questionId" jdbcType="BIGINT"/>
+            <result property="userId" column="userId" jdbcType="BIGINT"/>
+            <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP"/>
+            <result property="isDelete" column="isDelete" jdbcType="TINYINT"/>
+    </resultMap>
+<!--    <resultMap id="questionSubmitCountByUserMap" type="map">-->
+<!--        <result column="date" property="date" />-->
+<!--        <result column="record_count" property="record_count" />-->
+<!--    </resultMap>-->
+    <sql id="Base_Column_List">
+        id,language,code,
+        judgeInfo,status,questionId,
+        userId,createTime,updateTime,
+        isDelete
+    </sql>
+    <select id="getQuestionName" resultType="java.lang.String">
+        SELECT title FROM question WHERE id = #{questionId}
+    </select>
+<!--    <select id="getQuestionSubmitCountByUser" resultType="map" resultOrdered="true">-->
+<!--#         SELECT DATE(createTime) AS date, COUNT(*) AS recordCount-->
+<!--#         FROM question_submit-->
+<!--#         WHERE userId = #{id}-->
+<!--#         AND createTime > #{startDate}-->
+<!--#         AND createTime  &lt; #{endDate}-->
+<!--#         AND isDelete = 0-->
+<!--#         GROUP BY DATE(createTime)-->
+<!--#         ORDER BY date-->
+
+<!--    </select>-->
+    <select id="getQuestionSubmitCountByUser" resultType="map">
+        SELECT
+            DATE_FORMAT(createTime, '%Y-%m-%d') as date,
+            CAST(COUNT(*) AS SIGNED INTEGER) as recordCount
+        FROM question_submit
+        WHERE
+            userId = #{id}
+          AND createTime BETWEEN #{startDate} AND #{endDate}
+        GROUP BY DATE_FORMAT(createTime, '%Y-%m-%d')
+    </select>
+</mapper>

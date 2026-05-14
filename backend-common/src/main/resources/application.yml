@@ -1,0 +1,9 @@
+cos:
+  client:
+    accessKey: ${COS_ACCESS_KEY:your-cos-access-key}
+    secretKey: ${COS_SECRET_KEY:your-cos-secret-key}
+    region: ap-beijing
+    bucket: yyda-1333102418
+# AI 閰嶇疆
+ai:
+  apiKey: ${AI_API_KEY:your-ai-api-key}
