@@ -88,17 +88,47 @@ flowchart LR
     Question --> AI["AI 服务"]
 ```
 
-## 示例图预留
+## 项目截图
 
-如需在 README 中展示实际运行效果，建议将截图放入 `docs/images/`，然后替换下表中的占位说明。
+### 答题页面
 
-| 场景 | 图片位置建议 | 说明 |
-| --- | --- | --- |
-| 首页 / 题库列表 | `docs/images/home.png` | 展示题库、筛选、分页等入口 |
-| 题目详情 / 提交页 | `docs/images/question-detail.png` | 展示题目描述、判题配置、代码编辑器 |
-| 判题结果 | `docs/images/judge-result.png` | 展示 Accepted、Wrong Answer、时间 / 内存等信息 |
-| 竞赛页 | `docs/images/competition.png` | 展示竞赛列表、报名、竞赛题目 |
-| 接口文档 | `docs/images/api-docs.png` | 展示 Knife4j 聚合文档 |
+![答题页面](docs/images/answer-page.png)
+
+### 题库列表
+
+![题库列表](docs/images/question-list.png)
+
+### 创建题目
+
+![创建题目](docs/images/create-question.png)
+
+### 提交记录
+
+![提交记录](docs/images/submission-list.png)
+
+### 题目管理
+
+![题目管理](docs/images/question-management.png)
+
+### 竞赛日历
+
+![竞赛日历](docs/images/competition-calendar.png)
+
+### 评论区
+
+![评论区](docs/images/question-comments.png)
+
+### 评论详情
+
+![评论详情](docs/images/comment-thread.png)
+
+### 用户管理
+
+![用户管理](docs/images/user-management.png)
+
+### 个人中心
+
+![个人中心](docs/images/profile-center.png)
 
 ## 核心功能
 

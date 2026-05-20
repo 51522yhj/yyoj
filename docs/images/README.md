@@ -1,12 +1,17 @@
 # 示例图目录
 
-README 中预留了示例图位置，可将项目运行截图放到当前目录。
+本目录保存 README 中展示的项目运行截图。
 
-建议文件名：
+当前图片：
 
-- `home.png`
-- `question-detail.png`
-- `judge-result.png`
-- `competition.png`
-- `api-docs.png`
+- `answer-page.png`
+- `question-list.png`
+- `create-question.png`
+- `submission-list.png`
+- `question-management.png`
+- `competition-calendar.png`
+- `question-comments.png`
+- `comment-thread.png`
+- `user-management.png`
+- `profile-center.png`
 
